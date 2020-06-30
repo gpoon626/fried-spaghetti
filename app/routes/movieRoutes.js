@@ -21,6 +21,7 @@ router.post('/movies', (req, res, next) => {
 // GET /movies
 router.get('/movies', (req, res, next) => {
   Movie.find()
+    .populate('owner')
     .then(movie => res.json({movie: movie}))
     .catch(next)
 })
@@ -30,6 +31,8 @@ router.get('/movies', (req, res, next) => {
 router.get('/movies/:id', (req, res, next) => {
   const id = req.params.id
   Movie.findById(id)
+    .populate('owner')
+    .then(handle404)
     .then(movie => res.json({movie: movie}))
     .catch(next)
 })
