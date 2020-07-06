@@ -55,7 +55,7 @@ router.get('/movies/:id', requireToken, (req, res, next) => {
 // PATCH /movies/:id
 router.patch('/movies/:id', requireToken, removeBlanks, (req, res, next) => {
   delete req.body.movie.owner
-
+  // console.log(req)
   Movie.findById(req.params.id)
     .then(handle404)
     .then(movie => {
